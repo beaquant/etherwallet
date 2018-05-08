@@ -160,6 +160,7 @@ uiFuncs.generateTx = function(txData, callback) {
                 data: ethFuncs.sanitizeHex(txData.data)
             }
             if (ajaxReq.eip155) rawTx.chainId = ajaxReq.chainId;
+            rawTx.data = rawTx.data == '' ? '0x' : rawTx.data;
             var eTx = new ethUtil.Tx(rawTx);
             if ((typeof txData.hwType != "undefined") && (txData.hwType == "ledger")) {
                 var app = new ledgerEth(txData.hwTransport);
@@ -188,18 +189,20 @@ uiFuncs.generateTx = function(txData, callback) {
             } else if ((typeof txData.hwType != "undefined") && (txData.hwType == "trezor")) {
                 uiFuncs.signTxTrezor(rawTx, txData, callback);
             } else if ((typeof txData.hwType != "undefined") && (txData.hwType == "web3")) {
-              // for web3, we dont actually sign it here
-              // instead we put the final params in the "signedTx" field and
-              // wait for the confirmation dialogue / sendTx method
-              var txParams = Object.assign({ from: txData.from }, rawTx)
-              rawTx.rawTx = JSON.stringify(rawTx);
-              rawTx.signedTx = JSON.stringify(txParams);
-              rawTx.isError = false;
-              callback(rawTx)
+                // for web3, we dont actually sign it here
+                // instead we put the final params in the "signedTx" field and
+                // wait for the confirmation dialogue / sendTx method
+                var txParams = Object.assign({
+                    from: txData.from
+                }, rawTx)
+                rawTx.rawTx = JSON.stringify(rawTx);
+                rawTx.signedTx = JSON.stringify(txParams);
+                rawTx.isError = false;
+                callback(rawTx)
             } else if ((typeof txData.hwType != "undefined") && (txData.hwType == "digitalBitbox")) {
                 uiFuncs.signTxDigitalBitbox(eTx, rawTx, txData, callback);
             } else if ((typeof txData.hwType != "undefined") && (txData.hwType == "secalot")) {
-                uiFuncs.signTxSecalot(eTx, rawTx, txData, callback);                
+                uiFuncs.signTxSecalot(eTx, rawTx, txData, callback);
             } else {
                 eTx.sign(new Buffer(txData.privKey, 'hex'));
                 rawTx.rawTx = JSON.stringify(rawTx);
@@ -237,19 +240,21 @@ uiFuncs.generateTx = function(txData, callback) {
     }
 }
 uiFuncs.sendTx = function(signedTx, callback) {
-  // check for web3 late signed tx
-    if (signedTx.slice(0,2) !== '0x') {
-      var txParams = JSON.parse(signedTx)
-      window.web3.eth.sendTransaction(txParams, function(err, txHash){
-        if (err) {
-          return callback({
-            isError: true,
-            error: err.stack,
-          })
-        }
-        callback({ data: txHash })
-      });
-      return
+    // check for web3 late signed tx
+    if (signedTx.slice(0, 2) !== '0x') {
+        var txParams = JSON.parse(signedTx)
+        window.web3.eth.sendTransaction(txParams, function(err, txHash) {
+            if (err) {
+                return callback({
+                    isError: true,
+                    error: err.stack,
+                })
+            }
+            callback({
+                data: txHash
+            })
+        });
+        return
     }
 
     ajaxReq.sendRawTx(signedTx, function(data) {
@@ -299,6 +304,7 @@ uiFuncs.notifier = {
     },
     danger: function(msg, duration = 7000) {
         msg = msg.message ? msg.message : msg;
+        console.log(msg); //todo remove dev item
         // Danger messages can be translated based on the type of node
         msg = globalFuncs.getEthNodeMsg(msg);
         this.addAlert("danger", msg, duration);
@@ -330,5 +336,5 @@ uiFuncs.notifier = {
             }
         }
     },
-  }
+}
 module.exports = uiFuncs;

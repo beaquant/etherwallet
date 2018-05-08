@@ -7,11 +7,35 @@
 // http://www.tokensalecalendar.com/
 
 module.exports = [{
+// Merculet (MVP) Token sale
+to:         '0x8a77e40936bbc27e80e9a3f526368c967869c86d',
+gasLimit:   210000,
+data:       '',
+msg:        'Merculet (MVP) token sale - You must have registered at https://merculet.io and followed the instructions to purchase tokens here.'
+},{
+// GIFcoin (GIF) Token sale
+to:         '0xFcD862985628b254061F7A918035B80340D045d3',
+gasLimit:   200000,
+data:       '',
+msg:        'GIFcoin (GIF) token sale - https://gifcoin.io - save your ETH wallet after purchase on the website to gain access to investors hub.'
+},{
+// AX1 Mining token
+to:         '0x5de9f32b2665bb2cdc23bfb51b03e2a2985ecc87',
+gasLimit:   324741,
+data:       '',
+msg:        'You must have registered at https://ax1.io and followed the instructions to purchase tokens here.'
+},{
 // Accord (ARD) Token sale
 to:         '0x75aa7b0d02532f3833b66c7f0ad35376d373ddf8',
 gasLimit:   300000,
 data:       '',
 msg:        ' Accord (ARD) ERC20 token sale - http://accordtoken.com'
+},{
+// Primalbase Token (PBT)
+to:         '0xF4c07b1865bC326A3c01339492Ca7538FD038Cc0',
+gasLimit:   100000,
+data:       '',
+msg:        ''
 },{
 // BTQ Token Sale
 to:         '0x16B0E62aC13a2fAeD36D18bce2356d25Ab3CfAD3',
@@ -307,4 +331,22 @@ to:         '0xe8DB4ceA1f7ad7Ba22F3DbbAb55A336545701d96',
 gasLimit:   200000,
 data:       '',
 msg:        ' Duty of Care VDOC token sale - https://dutyof.care/token-launch/'
+},{
+// APIS Token sale
+to:         '0x749e66e12c09E4105381e373c0E6CA0bCe573d36',
+gasLimit:   200000,
+data:       '',
+msg:        ' APIS token sale - https://apisplatform.io'
+},{
+// WhoHas (WHO) Token Sale
+to:         '0xe933c0Cd9784414d5F278C114904F5A84b396919',
+gasLimit:   200000,
+data:       '',
+msg:        'WhoHas-Token Sale. Please register through our official website: https://whohas.io/'
+},{
+// WHEN (￦) Token Sale
+to:         '0xf4fe95603881d0e07954fd7605e0e9a916e42c44',
+gasLimit:   200000,
+data:       '',
+msg:        'WHEN Token Sale. Join the future of person-to-person micro-contracts using the blockchain.: https://interface.whenhub.com/'
 }]

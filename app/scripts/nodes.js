@@ -17,6 +17,10 @@ nodes.nodeTypes = {
     TOMO: "TOMO",
     ELLA: "ELLA",
     ETSC: "ETSC",
+    EGEM: "EGEM",
+    CLO: "CLO",
+    CLOT: "Testnet CLO",
+    EAST: "EAST",
     Custom: "CUSTOM ETH"
 };
 nodes.ensNodeTypes = [nodes.nodeTypes.ETH, nodes.nodeTypes.Ropsten];
@@ -246,16 +250,66 @@ nodes.nodeList = {
     },
     'etsc': {
         'name': 'ETSC',
-        'blockExplorerTX': 'https://explorer.ethereumsocial.kr/#/tx/[[txHash]]',
-        'blockExplorerAddr': 'https://explorer.ethereumsocial.kr/#/address/[[address]]',
+        'blockExplorerTX': 'https://explorer.ethereumsocial.kr/tx/[[txHash]]',
+        'blockExplorerAddr': 'https://explorer.ethereumsocial.kr/addr/[[address]]',
         'type': nodes.nodeTypes.ETSC,
         'eip155': true,
-        'chainId': 214,
+        'chainId': 28,
         'tokenList': require('./tokens/etscTokens.json'),
         'abiList': require('./abiDefinitions/etscAbi.json'),
         'estimateGas': true,
         'service': 'gazua.tv',
         'lib': new nodes.customNode('https://node.ethereumsocial.kr', '')
+    },
+    'egem': {
+        'name': 'EGEM',
+        'blockExplorerTX': 'https://explorer.egem.io/tx/[[txHash]]',
+        'blockExplorerAddr': 'https://explorer.egem.io/addr/[[address]]',
+        'type': nodes.nodeTypes.EGEM,
+        'eip155': true,
+        'chainId': 1987,
+        'tokenList': require('./tokens/egemTokens.json'),
+        'abiList': require('./abiDefinitions/egemAbi.json'),
+        'estimateGas': true,
+        'service': 'egem.io',
+        'lib': new nodes.customNode('https://jsonrpc.egem.io/custom', '')
+    },
+    'clo_mainnet': {
+        'name': 'CLO',
+        'blockExplorerTX': 'https://explorer.callisto.network/tx/[[txHash]]',
+        'blockExplorerAddr': 'https://explorer.callisto.network/addr/[[address]]',
+        'type': nodes.nodeTypes.CLO,
+        'eip155': true,
+        'chainId': 820,
+        'tokenList': require('./tokens/cloTokens.json'),
+        'abiList': require('./abiDefinitions/cloAbi.json'),
+        'service': 'Callisto.network',
+        'lib': new nodes.customNode('https://clo-geth.0xinfra.com/', '')
+    },
+    'clo_testnet3': {
+        'name': 'CLO Testnet 3.0',
+        'blockExplorerTX': 'https://explorer-testnet.callisto.network/tx/[[txHash]]',
+        'blockExplorerAddr': 'https://explorer-testnet.callisto.network/addr/[[address]]',
+        'type': nodes.nodeTypes.CLOT,
+        'eip155': true,
+        'chainId': 7919,
+        'tokenList': require('./tokens/cloTokens.json'),
+        'abiList': require('./abiDefinitions/cloAbi.json'),
+        'service': 'Callisto.network',
+        'lib': new nodes.customNode('https://clo-testnet3.0xinfra.com/', '')
+    },
+    'east': {
+        'name': 'EAST',
+        'blockExplorerTX': 'https://explorer.easthub.io/tx/[[txHash]]',
+        'blockExplorerAddr': 'https://explorer.easthub.io/addr/[[address]]',
+        'type': nodes.nodeTypes.EAST,
+        'eip155': true,
+        'chainId': 7,
+        'tokenList': require('./tokens/eastTokens.json'),
+        'abiList': require('./abiDefinitions/eastAbi.json'),
+        'estimateGas': true,
+        'service': 'easthub.io',
+        'lib': new nodes.customNode('https://node.easthub.io', '')
     }
 };
 
